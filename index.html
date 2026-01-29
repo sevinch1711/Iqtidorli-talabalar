@@ -87,11 +87,13 @@
   <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
-    "framer-motion": "https://esm.sh/framer-motion@^12.27.0"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "framer-motion": "https://esm.sh/framer-motion@^12.29.2",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
@@ -100,6 +102,9 @@
     <div class="custom-cursor" id="cursor"></div>
     <div class="custom-cursor-follower" id="cursor-follower"></div>
     <div id="root"></div>
+    
+    <script type="module" src="/index.tsx"></script>
+
     <script>
       const cursor = document.getElementById('cursor');
       const follower = document.getElementById('cursor-follower');
