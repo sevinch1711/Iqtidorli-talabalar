@@ -53,24 +53,24 @@ const Home: React.FC = () => {
         </motion.div>
 
         <div className="relative z-20 text-center px-6 max-w-7xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} className="mb-10">
-            <span className="px-8 py-3 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-[10px] uppercase tracking-[0.6em] font-black text-white/90">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} className="mb-8 md:mb-10">
+            <span className="px-6 md:px-8 py-3 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-[8px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.6em] font-black text-white/90">
               International Islamic Academy of Uzbekistan
             </span>
           </motion.div>
 
-          <h1 className="text-8xl md:text-[11vw] font-playfair font-bold text-white leading-[0.85] tracking-tighter mb-16">
+          <h1 className="text-5xl md:text-8xl lg:text-[11vw] font-playfair font-bold text-white leading-[0.9] tracking-tighter mb-12 md:mb-16">
             <RevealText>Fikr. Ilm.</RevealText>
             <span className="text-[#D4AF37] italic font-light block mt-4">
               <RevealText delay={0.3}>Kamolot.</RevealText>
             </span>
           </h1>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.8 }} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <Link to="/scholarships" className="px-14 py-6 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.8 }} className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8">
+            <Link to="/scholarships" className="w-full sm:w-auto px-10 md:px-14 py-5 md:py-6 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">
               Imkoniyatlar
             </Link>
-            <Link to="/about" className="px-14 py-6 bg-transparent border border-white/30 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#0A1F44] transition-all">
+            <Link to="/about" className="w-full sm:w-auto px-10 md:px-14 py-5 md:py-6 bg-transparent border border-white/30 text-white rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#0A1F44] transition-all">
               Biz haqimizda
             </Link>
           </motion.div>
@@ -78,19 +78,19 @@ const Home: React.FC = () => {
       </section>
 
       {/* Mission Cards Section */}
-      <section className="py-64 px-8 max-w-[1400px] mx-auto">
-        <div className="mb-32 text-center">
+      <section className="py-24 md:py-48 lg:py-64 px-6 md:px-8 max-w-[1400px] mx-auto">
+        <div className="mb-16 md:mb-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.8em] block mb-6">Bizning yo'limiz</span>
-            <h2 className="text-6xl md:text-8xl font-playfair font-bold text-[#0A1F44] leading-none tracking-tighter">Missiyamiz</h2>
+            <span className="text-[9px] md:text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.6em] md:tracking-[0.8em] block mb-4 md:mb-6">Bizning yo'limiz</span>
+            <h2 className="text-4xl md:text-7xl lg:text-8xl font-playfair font-bold text-[#0A1F44] leading-tight tracking-tighter">Missiyamiz</h2>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {missionCards.map((card, idx) => (
             <motion.div
               key={idx}
@@ -98,15 +98,15 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.2, duration: 1 }}
-              className="p-16 bg-white rounded-[80px] border border-slate-50 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-700 group"
+              className="p-10 md:p-16 bg-white rounded-[40px] md:rounded-[80px] border border-slate-50 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-700 group"
             >
-              <div className="text-6xl font-playfair font-bold text-slate-100 group-hover:text-[#D4AF37]/20 transition-colors mb-12">
+              <div className="text-4xl md:text-6xl font-playfair font-bold text-slate-100 group-hover:text-[#D4AF37]/20 transition-colors mb-8 md:mb-12">
                 {card.icon}
               </div>
-              <h3 className="text-3xl font-playfair font-bold text-[#0A1F44] mb-8 group-hover:text-[#D4AF37] transition-colors">
+              <h3 className="text-2xl md:text-3xl font-playfair font-bold text-[#0A1F44] mb-4 md:mb-8 group-hover:text-[#D4AF37] transition-colors">
                 {card.title}
               </h3>
-              <p className="text-xl text-slate-500 font-light leading-relaxed italic">
+              <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed italic">
                 "{card.desc}"
               </p>
             </motion.div>
@@ -115,18 +115,18 @@ const Home: React.FC = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-64 px-8 max-w-[1400px] mx-auto overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 items-center">
+      <section className="py-24 md:py-48 lg:py-64 px-6 md:px-8 max-w-[1400px] mx-auto overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-32 items-center">
           <div className="lg:col-span-5 relative">
-            <motion.div initial={{ scale: 1.2, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.5 }} className="rounded-[80px] overflow-hidden aspect-[4/5] shadow-2xl">
+            <motion.div initial={{ scale: 1.1, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.5 }} className="rounded-[40px] md:rounded-[80px] overflow-hidden aspect-[4/5] shadow-2xl">
               <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200" className="w-full h-full object-cover" alt="Philosophy" />
             </motion.div>
           </div>
           <div className="lg:col-span-7">
-            <h2 className="text-6xl md:text-8xl font-playfair font-bold text-[#0A1F44] leading-none tracking-tighter mb-12">
+            <h2 className="text-4xl md:text-7xl lg:text-8xl font-playfair font-bold text-[#0A1F44] leading-tight tracking-tighter mb-8 md:mb-12">
               Kelajakni <br /><span className="italic text-[#D4AF37]">bugun</span> quramiz.
             </h2>
-            <p className="text-2xl text-slate-500 font-light leading-relaxed">Biz nafaqat bilim, balki shaxsiyat va intellektual salohiyatni rivojlantirishga e'tibor qaratamiz.</p>
+            <p className="text-lg md:text-2xl text-slate-500 font-light leading-relaxed">Biz nafaqat bilim, balki shaxsiyat va intellektual salohiyatni rivojlantirishga e'tibor qaratamiz.</p>
           </div>
         </div>
       </section>

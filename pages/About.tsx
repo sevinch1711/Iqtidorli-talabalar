@@ -70,45 +70,45 @@ const About: React.FC = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
             <span className="text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.8em]">Missiyamiz</span>
           </motion.div>
-          <h1 className="text-7xl md:text-[10vw] font-playfair font-bold text-white leading-none tracking-tighter mb-16">
+          <h1 className="text-5xl md:text-8xl lg:text-[10vw] font-playfair font-bold text-white leading-tight tracking-tighter mb-12 md:mb-16">
             Ilm-fan va <br /> <span className="text-[#D4AF37] italic font-light">Ma'rifat.</span>
           </h1>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <Link to="/leaders" className="px-14 py-6 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8">
+            <Link to="/leaders" className="w-full sm:w-auto px-10 md:px-14 py-5 md:py-6 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">
               Talaba Liderlar
             </Link>
-            <Link to="/" className="px-14 py-6 bg-transparent border border-white/30 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#0A1F44] transition-all">
+            <Link to="/" className="w-full sm:w-auto px-10 md:px-14 py-5 md:py-6 bg-transparent border border-white/30 text-white rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#0A1F44] transition-all">
               Bosh sahifa
             </Link>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-48 px-8 max-w-5xl mx-auto text-center">
+      <section className="py-24 md:py-48 px-6 md:px-8 max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2 }}
         >
-          <span className="text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.6em] mb-12 block">Asosiy Maqsad</span>
-          <p className="text-4xl md:text-5xl font-playfair italic text-[#0A1F44] leading-relaxed mb-12">
+          <span className="text-[#D4AF37] text-[9px] md:text-[10px] font-black uppercase tracking-[0.6em] mb-8 md:mb-12 block">Asosiy Maqsad</span>
+          <p className="text-3xl md:text-5xl font-playfair italic text-[#0A1F44] leading-relaxed mb-10 md:mb-12">
             "Bizning bo'lim iqtidorli yoshlarni aniqlash, ularni har tomonlama qo'llab-quvvatlash va milliy g'urur ruhida tarbiyalashni o'z oldiga oliy maqsad qilgan."
           </p>
-          <p className="text-xl text-slate-500 font-light max-w-3xl mx-auto leading-loose">
+          <p className="text-lg md:text-xl text-slate-500 font-light max-w-3xl mx-auto leading-loose">
             Akademiyamizning iqtidorli talabalari — bu yurtimizning intellektual salohiyatini belgilab beruvchi kuch. Biz har bir iqtidor egasiga o'z qanotlarini yozishi uchun zarur bo'lgan barcha imkoniyatlarni yaratib berishga tayyormiz.
           </p>
         </motion.div>
       </section>
 
       {/* Staff Section */}
-      <section className="py-48 px-8 max-w-[1400px] mx-auto bg-white rounded-[100px] shadow-sm mb-48 border border-slate-50">
-        <div className="text-center mb-32">
-          <span className="text-[10px] font-black text-[#0A84FF] uppercase tracking-[0.8em] block mb-6">Ma'muriy jamoa</span>
-          <h2 className="text-5xl md:text-7xl font-playfair font-bold text-[#0A1F44]">Bo'lim xodimlari</h2>
+      <section className="py-24 md:py-48 px-6 md:px-8 max-w-[1400px] mx-auto bg-white rounded-[40px] md:rounded-[100px] shadow-sm mb-24 md:mb-48 border border-slate-50">
+        <div className="text-center mb-16 md:mb-32">
+          <span className="text-[9px] md:text-[10px] font-black text-[#0A84FF] uppercase tracking-[0.6em] md:tracking-[0.8em] block mb-4 md:mb-6">Ma'muriy jamoa</span>
+          <h2 className="text-4xl md:text-7xl font-playfair font-bold text-[#0A1F44]">Bo'lim xodimlari</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
           {staffMembers.map((staff) => (
             <motion.div
               key={staff.id}
@@ -116,10 +116,10 @@ const About: React.FC = () => {
               onClick={() => setSelectedStaff(staff)}
               className="group cursor-pointer text-center"
             >
-              <div className="aspect-[3/4] rounded-[60px] overflow-hidden mb-8 border border-slate-100 shadow-xl grayscale group-hover:grayscale-0 transition-all duration-1000">
+              <div className="aspect-[3/4] rounded-[40px] md:rounded-[60px] overflow-hidden mb-6 md:mb-8 border border-slate-100 shadow-xl sm:grayscale group-hover:grayscale-0 transition-all duration-1000">
                 <img src={staff.image} className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000" alt={staff.name} />
               </div>
-              <h4 className="text-2xl font-playfair font-bold text-[#0A1F44] mb-2">{staff.name}</h4>
+              <h4 className="text-xl md:text-2xl font-playfair font-bold text-[#0A1F44] mb-2">{staff.name}</h4>
               <p className="text-[#D4AF37] text-[9px] font-black uppercase tracking-widest">{staff.position}</p>
             </motion.div>
           ))}
@@ -128,43 +128,43 @@ const About: React.FC = () => {
 
       <Modal isOpen={!!selectedStaff} onClose={() => setSelectedStaff(null)} title="Xodim Ma'lumotlari">
         {selectedStaff && (
-          <div className="p-10 md:px-14 md:pb-14">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start mb-12">
+          <div className="px-6 md:px-14 md:pb-14 py-4">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start mb-10">
               <div className="md:col-span-5">
-                <div className="aspect-[3/4] rounded-[40px] overflow-hidden shadow-2xl border-8 border-[#F8FAFF]">
+                <div className="aspect-[3/4] rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl border-4 md:border-8 border-[#F8FAFF]">
                   <img src={selectedStaff.image} className="w-full h-full object-cover" alt={selectedStaff.name} />
                 </div>
               </div>
-              <div className="md:col-span-7 pt-6">
-                <h2 className="text-4xl font-playfair font-bold text-[#0A1F44] mb-2">{selectedStaff.name}</h2>
-                <p className="text-[#0A84FF] text-[10px] font-black uppercase tracking-[0.2em] mb-10">{selectedStaff.position}</p>
+              <div className="md:col-span-7 pt-4">
+                <h2 className="text-3xl md:text-4xl font-playfair font-bold text-[#0A1F44] mb-2">{selectedStaff.name}</h2>
+                <p className="text-[#0A84FF] text-[10px] font-black uppercase tracking-[0.2em] mb-8 md:mb-10">{selectedStaff.position}</p>
                 
-                <div className="bg-[#F8FAFF] p-8 rounded-[30px] mb-8">
-                  <span className="text-[#0A84FF] text-[9px] font-black uppercase tracking-widest block mb-4">Biografiya:</span>
+                <div className="bg-[#F8FAFF] p-6 md:p-8 rounded-[25px] md:rounded-[30px] mb-8">
+                  <span className="text-[#0A84FF] text-[8px] md:text-[9px] font-black uppercase tracking-widest block mb-4">Biografiya:</span>
                   <p className="text-lg font-playfair italic text-[#0A1F44]/70 leading-relaxed">
                     "{selectedStaff.bio}"
                   </p>
                 </div>
 
                 <div className="mb-8">
-                  <span className="text-slate-400 text-[9px] font-black uppercase tracking-widest block mb-2">Ma'lumoti:</span>
-                  <p className="text-[#0A1F44] font-medium text-lg">{selectedStaff.education}</p>
+                  <span className="text-slate-400 text-[8px] md:text-[9px] font-black uppercase tracking-widest block mb-2">Ma'lumoti:</span>
+                  <p className="text-[#0A1F44] font-medium text-lg leading-snug">{selectedStaff.education}</p>
                 </div>
                 
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                     <div>
-                      <span className="text-slate-400 text-[9px] font-black uppercase tracking-widest block mb-2">Qabul vaqtlari:</span>
-                      <p className="text-[#0A1F44] font-bold">{selectedStaff.receptionTime}</p>
+                      <span className="text-slate-400 text-[8px] md:text-[9px] font-black uppercase tracking-widest block mb-2">Qabul vaqtlari:</span>
+                      <p className="text-[#0A1F44] font-bold text-sm md:text-base">{selectedStaff.receptionTime}</p>
                     </div>
                     <div>
-                      <span className="text-slate-400 text-[9px] font-black uppercase tracking-widest block mb-2">Telefon:</span>
-                      <a href={`tel:${selectedStaff.phone}`} className="text-[#0A1F44] font-bold hover:text-[#D4AF37] transition-colors">{selectedStaff.phone}</a>
+                      <span className="text-slate-400 text-[8px] md:text-[9px] font-black uppercase tracking-widest block mb-2">Telefon:</span>
+                      <a href={`tel:${selectedStaff.phone}`} className="text-[#0A1F44] font-bold text-sm md:text-base hover:text-[#D4AF37] transition-colors">{selectedStaff.phone}</a>
                     </div>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-[9px] font-black uppercase tracking-widest block mb-2">Email:</span>
-                    <a href={`mailto:${selectedStaff.email}`} className="text-[#0A1F44] font-bold hover:text-[#D4AF37] transition-colors">{selectedStaff.email}</a>
+                    <span className="text-slate-400 text-[8px] md:text-[9px] font-black uppercase tracking-widest block mb-2">Email:</span>
+                    <a href={`mailto:${selectedStaff.email}`} className="text-[#0A1F44] font-bold text-sm md:text-base hover:text-[#D4AF37] transition-colors">{selectedStaff.email}</a>
                   </div>
                 </div>
               </div>
