@@ -25,10 +25,17 @@
         background-color: var(--bg);
         color: var(--text);
         overflow-x: hidden;
+        /* Tizim kursori endi ko'rinadi */
+        cursor: default;
       }
       
+      /* Elementlar ustida kursor ko'rsatgich bo'lsin */
+      a, button, [role="button"] {
+        cursor: pointer;
+      }
+
+      /* Maxsus effektlar faqat sichqonchali qurilmalarda ko'rinadi */
       @media (pointer: fine) {
-        body { cursor: none; }
         .custom-cursor, .custom-cursor-follower { display: block; }
       }
       
@@ -71,25 +78,26 @@
 
       .custom-cursor {
         position: fixed;
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         background: var(--accent);
         border-radius: 50%;
         pointer-events: none;
         z-index: 99999;
-        transition: transform 0.1s ease;
+        transition: transform 0.05s ease;
         display: none;
+        opacity: 0.8;
       }
 
       .custom-cursor-follower {
         position: fixed;
-        width: 32px;
-        height: 32px;
-        border: 1px solid rgba(212, 175, 55, 0.3);
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(212, 175, 55, 0.4);
         border-radius: 50%;
         pointer-events: none;
         z-index: 99998;
-        transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+        transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
         display: none;
       }
     </style>
@@ -117,22 +125,40 @@
     <script>
       const cursor = document.getElementById('cursor');
       const follower = document.getElementById('cursor-follower');
+      
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', (e) => {
-          cursor.style.transform = `translate3d(${e.clientX - 4}px, ${e.clientY - 4}px, 0)`;
-          follower.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
+          // Kursor markazi sichqoncha uchida turishi uchun offsetlar
+          cursor.style.transform = `translate3d(${e.clientX - 3}px, ${e.clientY - 3}px, 0)`;
+          follower.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
         });
-        document.querySelectorAll('a, button, div.cursor-pointer').forEach(el => {
-          el.addEventListener('mouseenter', () => {
-            cursor.style.transform += ' scale(2.5)';
-            follower.style.transform += ' scale(1.5)';
-            follower.style.background = 'rgba(212, 175, 55, 0.1)';
-          });
-          el.addEventListener('mouseleave', () => {
-            cursor.style.transform = cursor.style.transform.replace(' scale(2.5)', '');
-            follower.style.transform = follower.style.transform.replace(' scale(1.5)', '');
-            follower.style.background = 'transparent';
-          });
+
+        // Hover effektlari
+        const handleMouseEnter = () => {
+          cursor.style.transform += ' scale(2)';
+          follower.style.transform += ' scale(1.5)';
+          follower.style.background = 'rgba(212, 175, 55, 0.15)';
+          follower.style.borderColor = 'rgba(212, 175, 55, 0.8)';
+        };
+
+        const handleMouseLeave = () => {
+          cursor.style.transform = cursor.style.transform.replace(' scale(2)', '');
+          follower.style.transform = follower.style.transform.replace(' scale(1.5)', '');
+          follower.style.background = 'transparent';
+          follower.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+        };
+
+        // Dinamik qo'shilgan elementlar uchun ham ishlashi uchun delegatsiyadan foydalanamiz
+        document.addEventListener('mouseover', (e) => {
+          if (e.target.closest('a, button, .cursor-pointer')) {
+            handleMouseEnter();
+          }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+          if (e.target.closest('a, button, .cursor-pointer')) {
+            handleMouseLeave();
+          }
         });
       }
     </script>
