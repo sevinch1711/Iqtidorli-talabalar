@@ -44,11 +44,11 @@ const Home: React.FC = () => {
     <div ref={containerRef} className="relative bg-[#FCFBF7]">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#0A1F44]/75 z-10" />
+          <div className="absolute inset-0 bg-[#0A1F44]/60 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2400" 
+            src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerlSpA_esCfKdoztSMvOMdS46dugVglejfMsFPH6KudD3hqncbt_1-ICWXKThXWkMDjnCgBxDCV5BzO10Wexvx44QUQMGzDaaETogQnO63mAYVPl3Fy-V3Yut2WcGt-U_jpDR_cdA=s1360-w1360-h1020-rw" 
             className="w-full h-full object-cover" 
-            alt="Students collaborating" 
+            alt="O'zXIA Binosi" 
           />
         </motion.div>
 
