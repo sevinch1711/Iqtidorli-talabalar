@@ -10,7 +10,6 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
-  // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -33,42 +32,30 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
           />
           <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 md:p-8 pointer-events-none">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 40 }}
+              exit={{ opacity: 0, scale: 0.95, y: 30 }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="bg-white w-full max-w-3xl max-h-[85vh] flex flex-col rounded-[40px] shadow-[0_50px_100px_-20px_rgba(10,31,68,0.25)] pointer-events-auto overflow-hidden"
+              className="bg-white w-full max-w-[850px] max-h-[90vh] flex flex-col rounded-[48px] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] pointer-events-auto overflow-hidden relative"
             >
-              {/* Fixed Header */}
-              <div className="px-8 md:px-12 py-8 border-b border-slate-50 flex justify-between items-center bg-white z-20">
-                <div className="space-y-1">
-                   <h3 className="text-2xl md:text-3xl font-playfair font-bold text-[#0A1F44] leading-tight">{title}</h3>
-                   <div className="w-12 h-1 bg-[#0A84FF] rounded-full"></div>
+              {/* Top Header */}
+              <div className="flex items-center justify-between px-10 pt-10 pb-4">
+                <div className="flex flex-col">
+                  <h3 className="text-[#0A1F44] font-playfair font-bold text-xl">{title}</h3>
+                  <div className="w-12 h-[3px] bg-[#0A84FF] mt-2 rounded-full" />
                 </div>
                 <button 
                   onClick={onClose}
-                  className="p-3 bg-slate-50 hover:bg-slate-100 rounded-full transition-all duration-300 group"
-                  aria-label="Close modal"
+                  className="w-10 h-10 flex items-center justify-center bg-slate-50 hover:bg-slate-100 rounded-full transition-all duration-300 group"
                 >
-                  <svg className="w-6 h-6 text-slate-400 group-hover:text-[#0A1F44] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg className="w-4 h-4 text-slate-300 group-hover:text-[#0A1F44]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
-              {/* Scrollable Body */}
-              <div className="flex-grow overflow-y-auto px-8 md:px-12 py-10 custom-scrollbar">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="space-y-8"
-                >
-                  {children}
-                </motion.div>
-                
-                {/* Spacer to prevent content from touching the very bottom */}
-                <div className="h-10"></div>
+              <div className="flex-grow overflow-y-auto no-scrollbar">
+                {children}
               </div>
             </motion.div>
           </div>

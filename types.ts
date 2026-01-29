@@ -40,4 +40,6 @@ export interface StaffMember {
   phone: string;
   email: string;
   image: string;
+  bio?: string;
+  education?: string;
 }

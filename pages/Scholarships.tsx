@@ -1,179 +1,194 @@
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Modal from '../components/Modal';
 
-const Scholarships: React.FC = () => {
-  const [selectedGrant, setSelectedGrant] = useState<any>(null);
+interface Scholarship {
+  id: number;
+  title: string;
+  description: string;
+  requirements: string[];
+  lexLink: string;
+  icon: string;
+  amount?: string;
+}
 
-  const grants = [
-    {
-      id: 1,
-      title: "O'zbekiston Respublikasi Prezidenti stipendiyasi",
-      type: "Davlat miqyosida",
-      description: "Bakalavriatning oxirgi bosqich talabalari uchun eng nufuzli davlat mukofoti.",
-      icon: "🏆",
-      details: {
+const Scholarships: React.FC = () => {
+  const [selectedScholarship, setSelectedScholarship] = useState<Scholarship | null>(null);
+
+  const scholarshipData: Scholarship[] = useMemo(() => {
+    const base = [
+      {
+        title: 'Prezident Stipendiyasi',
+        description: "O'zbekiston Respublikasi Prezidentining eng nufuzli davlat mukofoti.",
         requirements: [
-          "O'quv fanlari bo'yicha o'zlashtirish ko'rsatkichi 85 ball va undan yuqori bo'lishi",
-          "Kamida 2 ta xalqaro yoki respublika miqyosidagi ilmiy maqola",
-          "C1 darajadagi xalqaro til sertifikati (IELTS 7.0+)",
-          "Jamoat ishlaridagi faol ishtirok"
+          "Barcha fanlardan a'lo baholar (kamida 75% 'a'lo')",
+          "Xalqaro va respublika ilmiy anjumanlaridagi ishtirok",
+          "Kamida 2 ta ilmiy maqola nashr etilgan bo'lishi",
+          "Xorijiy tillarni bilish darajasi (B2 va undan yuqori)"
         ],
-        benefits: "Bazaviy hisoblash miqdorining 10 baravari miqdorida oylik to'lov va magistraturaga imtihonsiz kirish huquqi.",
-        deadline: "Har yili sentyabr oyi"
-      }
-    },
-    {
-      id: 2,
-      title: "Navoiy nomidagi davlat stipendiyasi",
-      type: "Ijtimoiy-gumanitar yo'nalish",
-      description: "O'zbek tili va adabiyoti, islomshunoslik va dinshunoslik yo'nalishlari uchun.",
-      icon: "📜",
-      details: {
+        lexLink: "https://lex.uz/docs/-4725554",
+        icon: "👑"
+      },
+      {
+        title: 'Navoiy Stipendiyasi',
+        description: "Adabiyot, san'at va gumanitar fanlar sohasidagi yutuqlar uchun.",
         requirements: [
-          "Bakalavriatning 3 yoki 4-bosqich talabasi bo'lish",
-          "O'zbek tarixi va adabiyotini mukammal bilish",
-          "Ilmiy to'garaklarda faol ishtirok etish",
-          "A'lo baholarda o'qish"
+          "Ijtimoiy-gumanitar yo'nalish talabasi bo'lish",
+          "Ijodiy ishlari va maqolalari mavjudligi",
+          "O'quv ko'rsatkichlari yuqori bo'lishi",
+          "Ma'naviy-ma'rifiy tadbirlarda faol ishtirok"
         ],
-        benefits: "Maxsus stipendiya miqdori va kelajakda magistraturaga kirishda qo'shimcha imtiyozlar.",
-        deadline: "Sentyabr-Oktyabr"
-      }
-    },
-    {
-      id: 3,
-      title: "Akademiya iqtidorli talabalar granti",
-      type: "Ichki imkoniyat",
-      description: "Akademiyamiz tomonidan eng faol va tashabbuskor talabalarni qo'llab-quvvatlash jamg'armasi.",
-      icon: "🕌",
-      details: {
+        lexLink: "https://lex.uz/docs/-4725554",
+        icon: "✒️"
+      },
+      {
+        title: 'Akademiya Granti',
+        description: "Iqtidorli va kam ta'minlangan talabalarni qo'llab-quvvatlash dasturi.",
         requirements: [
-          "Akademiya ichki reytingida yuqori o'rin",
-          "Ijtimoiy loyihalarda faollik",
-          "Xulq-atvori namunali bo'lishi"
+          "Akademiya hayotida ijtimoiy faollik",
+          "Ilmiy loyihalarda qatnashish",
+          "O'rtacha ball 4.0 dan yuqori bo'lishi",
+          "Tavsiyanoma mavjudligi"
         ],
-        benefits: "Bir martalik yoki semestr davomida qo'shimcha moliyaviy rag'batlantirish.",
-        deadline: "Har semestr yakunida"
+        lexLink: "https://lex.uz/docs/-4725554",
+        icon: "🏛️"
       }
-    },
-    {
-      id: 4,
-      title: "Islom taraqqiqot banki stipendiyasi",
-      type: "Xalqaro hamkorlik",
-      description: "Xalqaro miqyosdagi ta'lim va tadqiqot loyihalarini moliyalashtirish dasturi.",
-      icon: "🌐",
-      details: {
-        requirements: [
-          "ITB a'zo davlatlar fuqarosi bo'lish",
-          "Muhandislik, tibbiyot yoki islom iqtisodiyoti yo'nalishida o'qish",
-          "Ingliz tilini yaxshi bilish"
-        ],
-        benefits: "O'qish xarajatlarini to'liq qoplash va oylik yashash xarajatlari uchun to'lov.",
-        deadline: "Fevral-Mart oylari"
-      }
-    }
-  ];
+    ];
+
+    return Array.from({ length: 6 }).map((_, i) => ({
+      ...base[i % base.length],
+      id: i + 1,
+    }));
+  }, []);
 
   return (
-    <div className="pt-56 pb-40 bg-white min-h-screen selection:bg-[#0A84FF]">
-      {/* Header */}
-      <section className="max-w-7xl mx-auto px-6 mb-40">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="text-center md:text-left"
-        >
-          <div className="inline-block px-6 py-2.5 rounded-full bg-slate-50 border border-slate-100 text-[#0A84FF] text-[11px] font-black uppercase tracking-[0.5em] mb-14">
-            Talabalarga Imkoniyatlar
-          </div>
-          <h1 className="text-7xl md:text-9xl font-playfair font-bold text-[#0A1F44] tracking-tighter leading-[0.85] mb-14">
-            Akademik <br /> <span className="italic font-light text-slate-200">mukofotlar.</span>
-          </h1>
-          <p className="text-3xl text-[#64748B] font-light max-w-4xl leading-relaxed">
-            Biz sizning akademik yutuqlaringizni qadrlaymiz va rivojlanishingiz uchun barcha moliyaviy va huquqiy imkoniyatlarni taqdim etamiz.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Hero Image - UPDATED FOR RELIABILITY */}
-      <section className="max-w-7xl mx-auto px-6 mb-56">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5 }}
-          className="relative aspect-[21/9] rounded-[100px] overflow-hidden border-[16px] border-white shadow-3xl bg-slate-100"
-        >
+    <div className="bg-[#FCFBF7] min-h-screen">
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[#0A1F44]/80 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=90&w=2400" 
+            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2400" 
             className="w-full h-full object-cover" 
-            alt="Academy Grand Library" 
+            alt="Opportunities" 
           />
-          <div className="absolute inset-0 bg-[#0A1F44]/25" />
+        </div>
+        <div className="relative z-20 text-center px-6 max-w-7xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+            <span className="text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.8em]">Akademik Imkoniyatlar</span>
+          </motion.div>
+          <h1 className="text-7xl md:text-[8vw] font-playfair font-bold text-white leading-none tracking-tighter mb-16">
+            Muvaffaqiyat <br /> <span className="text-[#D4AF37] italic font-light">Kaliti.</span>
+          </h1>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-32 px-8 max-w-4xl mx-auto text-center border-b border-slate-100">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <span className="text-[9px] font-black text-[#0A84FF] uppercase tracking-[0.4em] block mb-8">Moddiy va Ma'naviy Ko'mak</span>
+          <p className="text-3xl md:text-4xl font-playfair italic text-[#0A1F44] leading-relaxed">
+            "Biz iqtidorli yoshlarni nafaqat ma'naviy, balki moddiy jihatdan ham qo'llab-quvvatlaymiz. Har bir talabaning salohiyati biz uchun qadrlidir."
+          </p>
+          <div className="w-24 h-px bg-[#D4AF37]/30 mx-auto mt-12" />
         </motion.div>
       </section>
 
-      {/* Grants Grid */}
-      <section className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {grants.map((grant, idx) => (
-            <motion.div
-              key={grant.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 1 }}
-              className="p-20 bg-slate-50 rounded-[80px] transition-all duration-700 hover:bg-white hover:shadow-3xl hover:-translate-y-4 group border border-transparent hover:border-[#0A84FF]/10"
+      <section className="py-32 px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {scholarshipData.map((item) => (
+            <motion.div 
+              key={item.id} 
+              whileHover={{ y: -15 }} 
+              onClick={() => setSelectedScholarship(item)}
+              className="group cursor-pointer p-16 bg-white rounded-[60px] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-700"
             >
-              <div className="text-7xl mb-12 group-hover:scale-110 transition-transform duration-500">{grant.icon}</div>
-              <span className="text-[#0A84FF] font-black text-[12px] uppercase tracking-[0.5em] mb-8 block">{grant.type}</span>
-              <h3 className="text-5xl font-playfair font-bold text-[#0A1F44] mb-10 leading-tight">{grant.title}</h3>
-              <p className="text-2xl text-[#64748B] font-light leading-relaxed mb-16">{grant.description}</p>
-              <button 
-                onClick={() => setSelectedGrant(grant)}
-                className="flex items-center space-x-6 text-[#0A1F44] font-bold group-hover:text-[#0A84FF] transition-all duration-300"
-              >
-                <span className="uppercase text-xs tracking-[0.4em] border-b-2 border-transparent group-hover:border-[#0A84FF] pb-1">Batafsil ma'lumot</span>
-                <svg className="w-8 h-8 transform group-hover:translate-x-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <div className="text-5xl mb-8 group-hover:scale-125 transition-transform duration-500 origin-left inline-block">
+                {item.icon}
+              </div>
+              <h3 className="text-3xl font-playfair font-bold text-[#0A1F44] mb-6 group-hover:text-[#D4AF37] transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-slate-500 font-light mb-10 leading-relaxed italic">
+                "{item.description}"
+              </p>
+              <div className="flex items-center space-x-4">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1">
+                  Batafsil ma'lumot
+                </span>
+                <svg className="w-4 h-4 text-[#D4AF37] group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Detail Modal */}
       <Modal 
-        isOpen={!!selectedGrant} 
-        onClose={() => setSelectedGrant(null)} 
-        title={selectedGrant?.title || "Dastur tafsilotlari"}
+        isOpen={!!selectedScholarship} 
+        onClose={() => setSelectedScholarship(null)} 
+        title="Stipendiya Tafsilotlari"
       >
-        <div className="space-y-12">
-          <div className="bg-slate-50 rounded-[40px] p-12">
-            <h4 className="text-xs font-black uppercase tracking-[0.5em] text-[#0A84FF] mb-10">Asosiy Talablar</h4>
-            <ul className="space-y-6">
-              {selectedGrant?.details.requirements.map((req: string, i: number) => (
-                <li key={i} className="flex items-start space-x-6 text-[#475569] text-xl font-light leading-snug">
-                  <div className="w-3 h-3 rounded-full bg-[#0A84FF] mt-3.5 flex-shrink-0" />
-                  <span>{req}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-slate-100">
-            <div className="space-y-4">
-              <h4 className="text-xs font-black uppercase tracking-[0.5em] text-[#0A84FF]">Ariza topshirish muddati</h4>
-              <p className="text-4xl font-playfair font-bold text-[#0A1F44]">{selectedGrant?.details.deadline}</p>
+        {selectedScholarship && (
+          <div className="p-10 md:px-14 md:pb-14">
+            <div className="flex items-center space-x-6 mb-10">
+              <div className="text-6xl">{selectedScholarship.icon}</div>
+              <div>
+                <h2 className="text-4xl font-playfair font-bold text-[#0A1F44] mb-1">
+                  {selectedScholarship.title}
+                </h2>
+                <span className="text-[#D4AF37] text-[10px] font-black uppercase tracking-widest">
+                  Davlat Stipendiya Dasturi
+                </span>
+              </div>
             </div>
-            <div className="space-y-4">
-              <h4 className="text-xs font-black uppercase tracking-[0.5em] text-[#0A84FF]">Taqdim etiladigan imtiyoz</h4>
-              <p className="text-slate-600 font-light text-xl leading-relaxed">{selectedGrant?.details.benefits}</p>
+
+            <div className="bg-[#F8FAFF] p-10 rounded-[40px] mb-12">
+              <span className="text-[#0A84FF] text-[9px] font-black uppercase tracking-widest block mb-4">Dastur haqida qisqacha:</span>
+              <p className="text-xl font-playfair italic text-[#0A1F44]/70 leading-relaxed">
+                "{selectedScholarship.description}"
+              </p>
+            </div>
+
+            <div className="mb-12">
+              <h4 className="text-[#0A1F44] font-bold text-lg mb-6 flex items-center">
+                <span className="w-8 h-[2px] bg-[#D4AF37] mr-4 rounded-full" />
+                Asosiy Talablar
+              </h4>
+              <ul className="space-y-4">
+                {selectedScholarship.requirements.map((req, idx) => (
+                  <li key={idx} className="flex items-start space-x-4">
+                    <div className="mt-1.5 w-2 h-2 rounded-full bg-[#0A84FF]" />
+                    <span className="text-slate-600 font-medium">{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="pt-10 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-8">
+              <div className="text-slate-400 text-[10px] uppercase font-bold tracking-widest">
+                Manba: Lex.uz Huquqiy Portal
+              </div>
+              <a 
+                href={selectedScholarship.lexLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-12 py-5 bg-[#0A1F44] text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#D4AF37] transition-all flex items-center gap-4"
+              >
+                <span>Nizomni yuklab olish (PDF)</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </div>
           </div>
-        </div>
+        )}
       </Modal>
     </div>
   );
