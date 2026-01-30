@@ -6,6 +6,7 @@ import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -24,12 +25,28 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
   }, [location]);
 
   const navItems = [
     { label: 'Asosiy', path: '/' },
-    { label: 'Haqimizda', path: '/about' },
+    { 
+      label: 'Faoliyat', 
+      path: '#',
+      dropdown: [
+        { label: 'Iqtidorli talabalar bilan ishlash', path: '/faoliyat/talabalar' },
+        { label: 'Ilmiy bo\'lim', path: '/faoliyat/ilmiy' }
+      ]
+    },
     { label: 'Yutuqlar', path: '/achievements' },
+    { 
+      label: 'Nashrlar', 
+      path: '#',
+      dropdown: [
+        { label: 'To\'plamlar', path: '/publications/collections' },
+        { label: 'Talabalar kitoblari', path: '/publications/creativity' }
+      ]
+    },
     { label: 'Liderlar', path: '/leaders' },
     { label: 'Media', path: '/media' },
     { label: 'Stipendiyalar', path: '/scholarships' },
@@ -57,25 +74,58 @@ const Navbar: React.FC = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-12">
+        <div className="hidden lg:flex items-center space-x-10">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`relative text-[9px] font-black uppercase tracking-[0.3em] transition-all duration-700 ${
-                location.pathname === item.path 
-                  ? 'text-[#D4AF37]' 
-                  : (isScrolled ? 'text-[#0A1F44]/40 hover:text-[#0A1F44]' : 'text-white/40 hover:text-white')
-              }`}
+            <div 
+              key={item.label} 
+              className="relative group"
+              onMouseEnter={() => item.dropdown && setActiveDropdown(item.label)}
+              onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
             >
-              {item.label}
-              {location.pathname === item.path && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute -bottom-2 left-0 right-0 h-px bg-[#D4AF37]"
-                />
+              <Link
+                to={item.path}
+                className={`relative text-[9px] font-black uppercase tracking-[0.3em] py-2 transition-all duration-700 flex items-center gap-2 ${
+                  (location.pathname === item.path || (item.dropdown && item.dropdown.some(d => location.pathname === d.path)))
+                    ? 'text-[#D4AF37]' 
+                    : (isScrolled ? 'text-[#0A1F44]/40 hover:text-[#0A1F44]' : 'text-white/40 hover:text-white')
+                }`}
+              >
+                {item.label}
+                {item.dropdown && (
+                  <svg className={`w-2 h-2 transition-transform duration-500 ${activeDropdown === item.label ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+                {location.pathname === item.path && !item.dropdown && (
+                  <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-px bg-[#D4AF37]" />
+                )}
+              </Link>
+
+              {/* Dropdown Menu */}
+              {item.dropdown && (
+                <AnimatePresence>
+                  {activeDropdown === item.label && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute top-full left-0 mt-2 w-72 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 p-4 flex flex-col overflow-hidden"
+                    >
+                      {item.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.path}
+                          to={subItem.path}
+                          className="px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-[#0A1F44]/60 hover:text-[#D4AF37] hover:bg-slate-50 transition-all"
+                        >
+                          {subItem.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               )}
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -105,33 +155,40 @@ const Navbar: React.FC = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-50 bg-[#FCFBF7] lg:hidden flex flex-col items-center justify-center p-8"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-50 bg-[#FCFBF7] lg:hidden flex flex-col pt-32 p-8 overflow-y-auto"
           >
-            <div className="flex flex-col items-center space-y-10">
+            <div className="flex flex-col space-y-8">
               {navItems.map((item, idx) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  key={item.path}
-                >
-                  <Link
-                    to={item.path}
-                    className={`text-2xl font-playfair font-bold uppercase tracking-widest ${
-                      location.pathname === item.path ? 'text-[#D4AF37]' : 'text-[#0A1F44]'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </motion.div>
+                <div key={item.label}>
+                  {!item.dropdown ? (
+                    <Link
+                      to={item.path}
+                      className="text-4xl font-playfair font-bold text-[#0A1F44] block"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <div className="space-y-6">
+                      <span className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300 block mb-4">
+                        {item.label}
+                      </span>
+                      {item.dropdown.map(sub => (
+                        <Link
+                          key={sub.path}
+                          to={sub.path}
+                          className="text-3xl font-playfair font-bold text-[#0A1F44] block pl-4 border-l-2 border-[#D4AF37]/20 hover:border-[#D4AF37]"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
-            </div>
-            
-            <div className="absolute bottom-12 text-center">
-              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300">O'zXIA 2024</span>
             </div>
           </motion.div>
         )}

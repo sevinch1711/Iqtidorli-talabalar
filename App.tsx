@@ -5,12 +5,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
 import Scholarships from './pages/Scholarships';
 import News from './pages/News';
 import Media from './pages/Media';
 import Achievements from './pages/Achievements';
 import Leaders from './pages/Leaders';
+import DepartmentTalented from './pages/DepartmentTalented';
+import DepartmentScientific from './pages/DepartmentScientific';
+import PublicationsCollections from './pages/PublicationsCollections';
+import PublicationsCreativity from './pages/PublicationsCreativity';
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <motion.div
@@ -37,12 +40,15 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-        <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+        <Route path="/faoliyat/talabalar" element={<PageWrapper><DepartmentTalented /></PageWrapper>} />
+        <Route path="/faoliyat/ilmiy" element={<PageWrapper><DepartmentScientific /></PageWrapper>} />
         <Route path="/scholarships" element={<PageWrapper><Scholarships /></PageWrapper>} />
         <Route path="/news" element={<PageWrapper><News /></PageWrapper>} />
         <Route path="/media" element={<PageWrapper><Media /></PageWrapper>} />
         <Route path="/achievements" element={<PageWrapper><Achievements /></PageWrapper>} />
         <Route path="/leaders" element={<PageWrapper><Leaders /></PageWrapper>} />
+        <Route path="/publications/collections" element={<PageWrapper><PublicationsCollections /></PageWrapper>} />
+        <Route path="/publications/creativity" element={<PageWrapper><PublicationsCreativity /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );

@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-[#0A1F44] font-semibold mb-6">Bo'limlar</h4>
             <ul className="space-y-4 text-sm text-[#64748B]">
-              <li><Link to="/about" className="hover:text-[#0A84FF] transition-colors">Biz haqimizda</Link></li>
+              <li><Link to="/faoliyat/talabalar" className="hover:text-[#0A84FF] transition-colors">Talabalar bo'limi</Link></li>
               <li><Link to="/scholarships" className="hover:text-[#0A84FF] transition-colors">Stipendiyalar</Link></li>
               <li><Link to="/achievements" className="hover:text-[#0A84FF] transition-colors">Yutuqlar</Link></li>
               <li><Link to="/news" className="hover:text-[#0A84FF] transition-colors">Yangiliklar</Link></li>

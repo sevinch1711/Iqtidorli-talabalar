@@ -3,89 +3,59 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Modal from '../components/Modal';
 
+const staticLeaders = [
+  {
+    id: 1,
+    name: "Javohir Toshpo'latov",
+    role: "Talabalar Kengashi Raisi",
+    bio: "Javohir akademiyamizning eng faol talabalaridan biri bo'lib, yoshlar siyosati va ijtimoiy loyihalar bo'yicha katta tajribaga ega.",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200",
+    experience: "4 yil",
+    projects: "15+",
+    focus: "Strategiya"
+  },
+  {
+    id: 2,
+    name: "Mohira Ahmedova",
+    role: "Ilmiy Kengash Yetakchisi",
+    bio: "Mohira ilmiy-tadqiqot ishlarida talabalarni birlashtirish va xalqaro grantlarda ishtirok etish bo'yicha mas'ul.",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200",
+    experience: "3 yil",
+    projects: "8+",
+    focus: "Tadqiqot"
+  },
+  {
+    id: 3,
+    name: "Sardor Mirzaev",
+    role: "Innovatsiya Klubi Rahbari",
+    bio: "Sardor IT va innovatsion texnologiyalar orqali islom madaniyatini targ'ib qilish loyihalarini boshqaradi.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200",
+    experience: "2 yil",
+    projects: "12+",
+    focus: "Texnologiya"
+  }
+];
+
 const Leaders: React.FC = () => {
   const [selectedLeader, setSelectedLeader] = useState<any>(null);
 
-  const academyLeaders = [
-    { 
-      id: 1, name: "Jasur Turobov", role: "AKADEMIYA LIDERI", desc: "Strategik boshqaruv bo'yicha mutaxassis.", 
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600",
-      history: "Jasur Akademiya yoshlari orasida innovatsion g'oyalarni qo'llab-quvvatlash tizimini yaratdi va 10 dan ortiq yirik loyihalarga rahbarlik qildi.",
-      experience: "5 yil", projects: "12 ta", focus: "Strategiya"
-    },
-    { 
-      id: 2, name: "Kamola Nizomova", role: "KOORDINATOR", desc: "Ilmiy loyihalar boshqaruvchisi.", 
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600",
-      history: "Kamola xalqaro grantlar va ilmiy hamkorlik sohasida katta tajribaga ega bo'lib, talabalar uchun yangi imkoniyatlar ochishda faol ishtirok etadi.",
-      experience: "3 yil", projects: "8 ta", focus: "Ilmiy grant"
-    },
-    { 
-      id: 3, name: "Azizbek Rahimov", role: "MA'NAVIYAT YETAKCHISI", desc: "Milliy g'oya targ'ibotchisi.", 
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600",
-      history: "Azizbek talabalar orasida vatanparvarlik va milliy qadriyatlarni yuksaltirishga qaratilgan 'Yuksak Ma'naviyat' loyihasining asoschisi hisoblanadi.",
-      experience: "4 yil", projects: "15 ta", focus: "Ma'naviyat"
-    },
-    { 
-      id: 4, name: "Malika Aliyeva", role: "XALQARO ALOQALAR", desc: "Xorijiy universitetlar bilan hamkorlik.", 
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600",
-      history: "Malika sa'y-harakatlari bilan Akademiya 5 ta xorijiy nufuzli universitet bilan o'zaro memorandum imzoladi va talabalar almashinuvini yo'lga qo'ydi.",
-      experience: "2 yil", projects: "6 ta", focus: "Diplomatiya"
-    },
-    { 
-      id: 5, name: "Umar Xasanov", role: "IT VA INNOVATSIYA", desc: "Raqamli texnologiyalar bo'yicha maslahatchi.", 
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600",
-      history: "Umar talabalar portali va ichki monitoring tizimini ishlab chiqishda texnik rahbarlik qilgan. U ko'plab startap loyihalar mentori hisoblanadi.",
-      experience: "4 yil", projects: "10 ta", focus: "Texnologiya"
-    },
-    { 
-      id: 6, name: "Zuhra Karimoza", role: "LOYIHALAR MENEJERI", desc: "Ijtimoiy tashabbuslar yetakchisi.", 
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=600",
-      history: "Zuhra ko'plab ijtimoiy va xayriya loyihalari muallifi. U Akademiya yoshlarining ijtimoiy mas'uliyatini oshirish bo'yicha samarali ishlamoqda.",
-      experience: "3 yil", projects: "9 ta", focus: "Ijtimoiy faollik"
-    }
-  ];
-
   return (
     <div className="bg-[#FCFBF7] min-h-screen pb-40">
-      {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[#0A1F44]/75 z-10" />
-          <img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=2400" className="w-full h-full object-cover" alt="" />
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2400" className="w-full h-full object-cover" alt="Leaders Academy" />
         </div>
         <div className="relative z-20 text-center px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-block px-10 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-10 text-white text-[10px] font-black uppercase tracking-[0.8em]">Yetakchilar Hamjamiyati</motion.div>
           <h1 className="text-7xl md:text-[10vw] font-playfair font-bold text-white leading-none tracking-tighter mb-10">
             Ertangi <br /> <span className="text-[#D4AF37] italic font-light">Yetakchilar.</span>
           </h1>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <button className="px-14 py-6 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">Bizning jamoa</button>
-            <button className="px-14 py-6 bg-transparent border border-white/30 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#0A1F44] transition-all">Loyihalar</button>
-          </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-48 px-8 max-w-4xl mx-auto text-center border-b border-slate-100">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-        >
-          <span className="text-[9px] font-black text-[#D4AF37] uppercase tracking-[0.6em] block mb-8">Yetakchilik Falsafasi</span>
-          <p className="text-3xl md:text-5xl font-playfair italic text-[#0A1F44] leading-tight">
-            "Bizning jamoa akademiyaning eng faol va intiluvchan yoshlaridan tashkil topgan. Biz birgalikda buyuk maqsadlar sari odimlaymiz."
-          </p>
-          <p className="mt-10 text-slate-500 font-light text-xl max-w-2xl mx-auto">
-            Liderlik — bu nafaqat boshqarish, balki o'z ortidan ergashtirish va yangi marralarni zabt etish demakdir.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Grid */}
-      <section className="py-48 px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-24 max-w-7xl mx-auto">
-        {academyLeaders.map(leader => (
+      <section className="py-48 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-24">
+        {staticLeaders.map(leader => (
           <motion.div 
             key={leader.id} 
             initial={{ opacity: 0, y: 30 }}
@@ -108,7 +78,7 @@ const Leaders: React.FC = () => {
           <div className="p-10 md:px-14 md:pb-14">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start mb-12">
               <div className="md:col-span-5 relative">
-                <div className="aspect-square rounded-[40px] overflow-hidden shadow-2xl border-8 border-[#F8FAFF]">
+                <div className="aspect-square rounded-[40px] overflow-hidden shadow-2xl border-8 border-[#F8FAFF] bg-slate-50">
                   <img src={selectedLeader.image} className="w-full h-full object-cover" alt="" />
                 </div>
               </div>
@@ -118,12 +88,11 @@ const Leaders: React.FC = () => {
                 <div className="bg-[#F8FAFF] p-8 rounded-[40px]">
                   <span className="text-[#0A84FF] text-[9px] font-black uppercase tracking-widest block mb-4">Biografiya:</span>
                   <p className="text-lg md:text-xl font-playfair italic text-[#0A1F44]/70 leading-relaxed">
-                    "{selectedLeader.history}"
+                    "{selectedLeader.bio}"
                   </p>
                 </div>
               </div>
             </div>
-
             <div className="pt-10 border-t border-slate-100 grid grid-cols-3 gap-8 text-center md:text-left">
               <div>
                 <span className="text-slate-400 text-[9px] font-black uppercase tracking-[0.2em] block mb-2">Tajriba</span>
