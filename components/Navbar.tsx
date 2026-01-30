@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { NavItem } from '../types';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,7 @@ const Navbar: React.FC = () => {
     setActiveDropdown(null);
   }, [location]);
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { label: 'Asosiy', path: '/' },
     { 
       label: 'Faoliyat', 
@@ -102,29 +103,27 @@ const Navbar: React.FC = () => {
               </Link>
 
               {/* Dropdown Menu */}
-              {item.dropdown && (
-                <AnimatePresence>
-                  {activeDropdown === item.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute top-full left-0 mt-2 w-72 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 p-4 flex flex-col overflow-hidden"
-                    >
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.path}
-                          to={subItem.path}
-                          className="px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-[#0A1F44]/60 hover:text-[#D4AF37] hover:bg-slate-50 transition-all"
-                        >
-                          {subItem.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              )}
+              <AnimatePresence>
+                {item.dropdown && activeDropdown === item.label && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute top-full left-0 mt-2 w-72 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 p-4 flex flex-col overflow-hidden"
+                  >
+                    {item.dropdown.map((subItem) => (
+                      <Link
+                        key={subItem.path}
+                        to={subItem.path}
+                        className="px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-[#0A1F44]/60 hover:text-[#D4AF37] hover:bg-slate-50 transition-all"
+                      >
+                        {subItem.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
@@ -162,7 +161,7 @@ const Navbar: React.FC = () => {
             className="fixed inset-0 z-50 bg-[#FCFBF7] lg:hidden flex flex-col pt-32 p-8 overflow-y-auto"
           >
             <div className="flex flex-col space-y-8">
-              {navItems.map((item, idx) => (
+              {navItems.map((item) => (
                 <div key={item.label}>
                   {!item.dropdown ? (
                     <Link

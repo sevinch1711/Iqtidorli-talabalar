@@ -5,10 +5,25 @@
  */
 
 // Vercel yoki mahalliy muhitdagi o'zgaruvchilar
-// Eslatma: Frontend'da process.env ishlatish uchun Vite'da VITE_ prefiksi kerak bo'lishi mumkin,
-// lekin ko'p holatlarda process.env.API_KEY kabi global o'zgaruvchilar inject qilinadi.
-const STRAPI_URL = (typeof process !== 'undefined' && process.env.STRAPI_URL) || 'http://localhost:1337';
-const STRAPI_TOKEN = typeof process !== 'undefined' ? process.env.STRAPI_API_TOKEN : '';
+// Vite brauzerda process.env ni shim qilmasligi mumkin, shuning uchun himoya kerak.
+const getEnv = (key: string): string => {
+  try {
+    // @ts-ignore
+    if (typeof process !== 'undefined' && process.env && process.env[key]) {
+      // @ts-ignore
+      return process.env[key] as string;
+    }
+    // @ts-ignore
+    if (import.meta.env && import.meta.env[`VITE_${key}`]) {
+      // @ts-ignore
+      return import.meta.env[`VITE_${key}`] as string;
+    }
+  } catch (e) {}
+  return '';
+};
+
+const STRAPI_URL = getEnv('STRAPI_URL') || 'http://localhost:1337';
+const STRAPI_TOKEN = getEnv('STRAPI_API_TOKEN');
 
 export const getStrapiURL = (path = '') => {
   return `${STRAPI_URL}${path}`;

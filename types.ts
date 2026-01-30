@@ -2,6 +2,7 @@
 export interface NavItem {
   label: string;
   path: string;
+  dropdown?: NavItem[];
 }
 
 export interface Achievement {
@@ -16,11 +17,11 @@ export interface Achievement {
 
 export interface NewsItem {
   id: number;
-  title: string;
   date: string;
   excerpt: string;
   image: string;
   category: string;
+  title: string;
 }
 
 export interface Leader {
