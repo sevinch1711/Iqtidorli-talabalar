@@ -24,6 +24,13 @@ const Home: React.FC = () => {
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
 
+  const stats = [
+    { label: "Iqtidorli talabalar", value: "500+" },
+    { label: "Xalqaro loyihalar", value: "24" },
+    { label: "Davlat stipendiatlari", value: "112" },
+    { label: "Ilmiy nashrlar", value: "1.2k" }
+  ];
+
   const missionCards = [
     {
       title: "Iqtidorlarni aniqlash",
@@ -60,7 +67,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }} 
-            className="mb-10 mt-[100px]"
+            className="mb-10 mt-[200px]"
           >
             <span className="px-10 py-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl text-[9px] md:text-[10px] uppercase tracking-[0.6em] font-black text-white/90">
               O'zbekiston Xalqaro Islom Akademiyasi
@@ -89,15 +96,36 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
         
+        {/* Decorative element (no text) */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           transition={{ delay: 2.5, duration: 1.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
         >
-          <span className="text-[8px] uppercase tracking-[0.4em] text-white/50 font-bold">Scroll</span>
           <div className="w-px h-24 bg-gradient-to-b from-[#D4AF37] to-transparent" />
         </motion.div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-32 bg-white relative z-30 border-y border-slate-50">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 1 }}
+                className="text-center"
+              >
+                <span className="block text-4xl md:text-7xl font-playfair font-bold text-[#0A1F44] mb-4">{stat.value}</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">{stat.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Mission Section */}
