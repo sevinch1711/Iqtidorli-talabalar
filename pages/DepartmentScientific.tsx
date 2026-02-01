@@ -14,9 +14,9 @@ const DepartmentScientific: React.FC = () => {
     <div className="bg-[#FCFBF7] min-h-screen">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#0A1F44]/85 z-10" />
+          <div className="absolute inset-0 bg-[#0A1F44]/75 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2400" 
+            src="https://cdn.uza.uz/2022/04/09/17/15/w0lSF2OLgwJS8Zep8e2NDXJUHB30wMo2_front.jpg" 
             className="w-full h-full object-cover" 
             alt="Science and Research" 
           />

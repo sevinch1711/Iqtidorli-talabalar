@@ -61,9 +61,9 @@ const PublicationsCreativity: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[#0A1F44]/80 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1455391727333-85e68379447b?q=80&w=2400" 
+            src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2400" 
             className="w-full h-full object-cover" 
-            alt="Library Background" 
+            alt="Premium Library Background" 
           />
         </div>
         <div className="relative z-20 text-center px-6 max-w-7xl">

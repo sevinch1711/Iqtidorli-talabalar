@@ -26,7 +26,7 @@ const Media: React.FC = () => {
       { type: 'Foto', title: "Konferensiya 2024", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1200" },
       { type: 'Video', title: "Talabalar Hayoti", img: "https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=1200" },
       { type: 'Foto', title: "Sport Musobaqasi", img: "https://images.unsplash.com/photo-1461896756913-6d9ee99bc65c?q=80&w=1200" },
-      { type: 'Foto', title: "Ilmiy Sayohat", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200" }
+      { type: 'Foto', title: "Ilmiy Sayohat", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04844?q=80&w=1200" }
     ];
 
     return Array.from({ length: 20 }).map((_, i) => ({
@@ -52,8 +52,12 @@ const Media: React.FC = () => {
     <div className="bg-[#FCFBF7] min-h-screen">
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#0A1F44]/80 z-10" />
-          <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=2400" className="w-full h-full object-cover" alt="" />
+          <div className="absolute inset-0 bg-[#0A1F44]/65 z-10" />
+          <img 
+            src="https://lh3.googleusercontent.com/d/17etYK5PY5zi3VyisfvehNSuU1tTsScgX" 
+            className="w-full h-full object-cover" 
+            alt="Academy Life Media" 
+          />
         </div>
         <div className="relative z-20 text-center px-6">
           <span className="text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.8em] block mb-8">Vizual Arxiv</span>
