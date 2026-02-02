@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -18,23 +18,17 @@ const RevealText: React.FC<{ children: React.ReactNode; delay?: number }> = ({ c
 
 const Home: React.FC = () => {
   const containerRef = useRef(null);
+
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
 
-  const stats = [
-    { label: "Iqtidorli talabalar", value: "500+" },
-    { label: "Xalqaro loyihalar", value: "24" },
-    { label: "Davlat stipendiatlari", value: "112" },
-    { label: "Ilmiy nashrlar", value: "1.2k" }
-  ];
-
   const missionCards = [
     {
       title: "Iqtidorlarni aniqlash",
-      desc: "Akademiyamizdagi eng salohiyatli yoshlarni turli tanlovlar va monitoring orqali saralab olamiz.",
+      desc: "Akademiyamizdagii eng salohiyatli yoshlarni turli tanlovlar va monitoring orqali saralab olamiz.",
       icon: "01"
     },
     {
@@ -52,7 +46,7 @@ const Home: React.FC = () => {
   return (
     <div ref={containerRef} className="relative bg-[#FCFBF7]">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-40 pb-20">
         <motion.div style={{ opacity: heroOpacity, scale: heroScale, y: heroY }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[#0A1F44]/55 z-10" />
           <img 
@@ -62,21 +56,21 @@ const Home: React.FC = () => {
           />
         </motion.div>
 
-        <div className="relative z-20 text-center px-6 max-w-7xl">
+        <div className="relative z-20 text-center px-6 max-w-7xl flex flex-col items-center">
           <motion.div 
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }} 
-            className="mb-10 mt-[200px]"
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} 
+            className="mb-8 md:mb-12"
           >
-            <span className="px-10 py-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl text-[9px] md:text-[10px] uppercase tracking-[0.6em] font-black text-white/90">
-              O'zbekiston Xalqaro Islom Akademiyasi
+            <span className="px-6 py-3 md:px-10 md:py-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl text-[8px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.6em] font-black text-white/90">
+              O'zbekiston Xalqaro Islomshunoslik Akademiyasi
             </span>
           </motion.div>
 
-          <h1 className="text-5xl md:text-8xl lg:text-[11vw] font-playfair font-bold text-white leading-[0.85] tracking-tighter mb-16">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] font-playfair font-bold text-white leading-[1.1] tracking-tighter mb-12 md:mb-16">
             <RevealText>Fikr. Ilm.</RevealText>
-            <span className="text-[#D4AF37] italic font-light block mt-6">
+            <span className="text-[#D4AF37] italic font-light block">
               <RevealText delay={0.4}>Kamolot.</RevealText>
             </span>
           </h1>
@@ -84,53 +78,31 @@ const Home: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: 40 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 1.8, delay: 1, ease: [0.16, 1, 0.3, 1] }} 
-            className="flex flex-col sm:flex-row items-center justify-center gap-8"
+            transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }} 
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8 w-full sm:w-auto"
           >
-            <Link to="/scholarships" className="w-full sm:w-auto px-16 py-7 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[10px] font-black uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-[0_20px_50px_rgba(212,175,55,0.3)]">
+            <Link to="/scholarships" className="w-full sm:w-auto px-10 md:px-16 py-5 md:py-7 bg-[#D4AF37] text-[#0A1F44] rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-[0_20px_50px_rgba(212,175,55,0.3)] text-center">
               Imkoniyatlar
             </Link>
-            <Link to="/achievements" className="w-full sm:w-auto px-16 py-7 bg-transparent border border-white/30 text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-[#0A1F44] transition-all">
+            <Link to="/achievements" className="w-full sm:w-auto px-10 md:px-16 py-5 md:py-7 bg-transparent border border-white/30 text-white rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-[#0A1F44] transition-all text-center">
               Shon-sharaf zali
             </Link>
           </motion.div>
         </div>
         
-        {/* Decorative element (no text) */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
-          transition={{ delay: 2.5, duration: 1.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
+          transition={{ delay: 2, duration: 1.5 }}
+          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center"
         >
-          <div className="w-px h-24 bg-gradient-to-b from-[#D4AF37] to-transparent" />
+          <div className="w-px h-16 bg-gradient-to-b from-[#D4AF37] to-transparent" />
         </motion.div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-32 bg-white relative z-30 border-y border-slate-50">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 1 }}
-                className="text-center"
-              >
-                <span className="block text-4xl md:text-7xl font-playfair font-bold text-[#0A1F44] mb-4">{stat.value}</span>
-                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">{stat.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Mission Section */}
-      <section className="py-48 md:py-64 lg:py-80 px-6 md:px-8 max-w-[1400px] mx-auto">
-        <div className="mb-32 md:mb-48 text-center">
+      <section className="py-24 md:py-48 lg:py-64 px-6 md:px-8 max-w-[1400px] mx-auto">
+        <div className="mb-20 md:mb-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -138,11 +110,11 @@ const Home: React.FC = () => {
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.8em] block mb-8">Bizning yo'limiz</span>
-            <h2 className="text-5xl md:text-8xl lg:text-9xl font-playfair font-bold text-[#0A1F44] leading-tight tracking-tighter">Missiyamiz</h2>
+            <h2 className="text-4xl md:text-7xl lg:text-9xl font-playfair font-bold text-[#0A1F44] leading-tight tracking-tighter">Missiyamiz</h2>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16">
           {missionCards.map((card, idx) => (
             <motion.div
               key={idx}
@@ -150,15 +122,15 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="p-16 md:p-20 bg-white rounded-[80px] md:rounded-[100px] border border-slate-50 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_100px_rgba(0,0,0,0.05)] hover:-translate-y-6 transition-all duration-1000 group"
+              className="p-10 md:p-16 bg-white rounded-[60px] md:rounded-[100px] border border-slate-50 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_100px_rgba(0,0,0,0.05)] hover:-translate-y-4 transition-all duration-1000 group"
             >
-              <div className="text-5xl md:text-7xl font-playfair font-bold text-slate-100 group-hover:text-[#D4AF37]/20 transition-colors duration-700 mb-12 md:mb-16">
+              <div className="text-4xl md:text-7xl font-playfair font-bold text-slate-100 group-hover:text-[#D4AF37]/20 transition-colors duration-700 mb-8 md:mb-16">
                 {card.icon}
               </div>
-              <h3 className="text-3xl md:text-4xl font-playfair font-bold text-[#0A1F44] mb-8 group-hover:text-[#D4AF37] transition-colors duration-700">
+              <h3 className="text-2xl md:text-4xl font-playfair font-bold text-[#0A1F44] mb-6 group-hover:text-[#D4AF37] transition-colors duration-700">
                 {card.title}
               </h3>
-              <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed italic">
+              <p className="text-lg md:text-2xl text-slate-500 font-light leading-relaxed italic">
                 "{card.desc}"
               </p>
             </motion.div>
@@ -167,15 +139,15 @@ const Home: React.FC = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-48 md:py-64 px-6 md:px-8 max-w-[1400px] mx-auto overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-32 items-center">
+      <section className="py-24 md:py-48 px-6 md:px-8 max-w-[1400px] mx-auto overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-center">
           <div className="lg:col-span-5 relative">
             <motion.div 
               initial={{ scale: 1.2, opacity: 0, rotate: -2 }} 
               whileInView={{ scale: 1, opacity: 1, rotate: 0 }} 
               viewport={{ once: true }} 
               transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }} 
-              className="rounded-[80px] overflow-hidden aspect-[4/5] shadow-2xl bg-slate-100 border-8 border-white"
+              className="rounded-[60px] md:rounded-[80px] overflow-hidden aspect-[4/5] shadow-2xl bg-slate-100 border-4 md:border-8 border-white"
             >
               <img src="https://static.oliygoh.uz/crop/2/1/832__85_2155841199.jpg?t=1735969157" className="w-full h-full object-cover" alt="Philosophy" />
             </motion.div>
@@ -187,10 +159,10 @@ const Home: React.FC = () => {
                viewport={{ once: true }}
                transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h2 className="text-5xl md:text-8xl font-playfair font-bold text-[#0A1F44] leading-[1.1] tracking-tighter mb-12">
+              <h2 className="text-4xl md:text-7xl lg:text-8xl font-playfair font-bold text-[#0A1F44] leading-[1.1] tracking-tighter mb-8 md:mb-12">
                 Kelajakni <br /><span className="italic text-[#D4AF37]">bugun</span> quramiz.
               </h2>
-              <p className="text-2xl md:text-3xl text-slate-500 font-light leading-relaxed max-w-2xl">
+              <p className="text-lg md:text-2xl lg:text-3xl text-slate-500 font-light leading-relaxed max-w-2xl">
                 Biz nafaqat bilim, balki shaxsiyat va intellektual salohiyatni rivojlantirishga e'tibor qaratamiz. Har bir talabaning iqtidori — yurtimizning bebaho xazinasi va yorqin kelajagi poydevoridir.
               </p>
             </motion.div>

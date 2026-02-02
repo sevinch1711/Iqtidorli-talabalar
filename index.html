@@ -25,16 +25,13 @@
         background-color: var(--bg);
         color: var(--text);
         overflow-x: hidden;
-        /* Tizim kursori endi ko'rinadi */
         cursor: default;
       }
       
-      /* Elementlar ustida kursor ko'rsatgich bo'lsin */
       a, button, [role="button"] {
         cursor: pointer;
       }
 
-      /* Maxsus effektlar faqat sichqonchali qurilmalarda ko'rinadi */
       @media (pointer: fine) {
         .custom-cursor, .custom-cursor-follower { display: block; }
       }
@@ -128,12 +125,10 @@
       
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', (e) => {
-          // Kursor markazi sichqoncha uchida turishi uchun offsetlar
           cursor.style.transform = `translate3d(${e.clientX - 3}px, ${e.clientY - 3}px, 0)`;
           follower.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
         });
 
-        // Hover effektlari
         const handleMouseEnter = () => {
           cursor.style.transform += ' scale(2)';
           follower.style.transform += ' scale(1.5)';
@@ -148,7 +143,6 @@
           follower.style.borderColor = 'rgba(212, 175, 55, 0.4)';
         };
 
-        // Dinamik qo'shilgan elementlar uchun ham ishlashi uchun delegatsiyadan foydalanamiz
         document.addEventListener('mouseover', (e) => {
           if (e.target.closest('a, button, .cursor-pointer')) {
             handleMouseEnter();

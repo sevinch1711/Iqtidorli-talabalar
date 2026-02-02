@@ -53,6 +53,8 @@ const Navbar: React.FC = () => {
     { label: 'Stipendiyalar', path: '/scholarships' },
   ];
 
+  const logoUrl = "https://lh3.googleusercontent.com/d/1lOQ8BI09iEXoI3DZD2tOoyn16hssFpT5";
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
@@ -68,10 +70,17 @@ const Navbar: React.FC = () => {
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 flex justify-between items-center">
         <Link to="/" className="group flex items-center space-x-3 md:space-x-4">
-          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#D4AF37] group-hover:scale-125 transition-all duration-700" />
-          <span className={`text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] transition-colors duration-700 ${isScrolled ? 'text-[#0A1F44]' : 'text-white'}`}>
-            Iqtidorli Talabalar
-          </span>
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-white border border-slate-100 group-hover:scale-110 transition-all duration-700 shadow-sm flex items-center justify-center">
+            <img src={logoUrl} alt="O'zXIA TIJ Logo" className="w-full h-full object-cover" />
+          </div>
+          <div className="flex flex-col">
+            <span className={`text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] transition-colors duration-700 max-w-[200px] leading-tight ${isScrolled ? 'text-[#0A1F44]' : 'text-white'}`}>
+              O'zbekiston Xalqaro Islomshunoslik Akademiyasi
+            </span>
+            <span className={`text-[7px] md:text-[8px] font-bold uppercase tracking-[0.1em] opacity-60 ${isScrolled ? 'text-[#D4AF37]' : 'text-[#D4AF37]'}`}>
+              Talabalar Ilmiy Jamiyati
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Menu */}
@@ -102,7 +111,6 @@ const Navbar: React.FC = () => {
                 )}
               </Link>
 
-              {/* Dropdown Menu */}
               <AnimatePresence>
                 {item.dropdown && activeDropdown === item.label && (
                   <motion.div
@@ -150,7 +158,6 @@ const Navbar: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
